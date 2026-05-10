@@ -1,0 +1,806 @@
+/* =============================================
+   BIRTHDAY WEBSITE — style.css
+   Theme: Premium Modern Glassmorphism & Polaroids
+   ============================================= */
+
+:root {
+  --pink-light: #ffe6f0;
+  --pink-mid: #fca5c5;
+  --pink-deep: #ff4d8d;
+  --gold: #ffc837;
+  --text-dark: #3a1c27;
+  --text-light: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --font-cursive: 'Dancing Script', cursive;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+  color: var(--text-dark);
+  overflow: hidden;
+  cursor: none;
+}
+
+/* =============================================
+   ULTRA-SMOOTH CUSTOM CURSOR
+   ============================================= */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: var(--pink-deep);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  /* Shift exact center to match mouse */
+  margin-left: -5px;
+  margin-top: -5px;
+}
+
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--pink-deep);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  margin-left: -20px;
+  margin-top: -20px;
+  /* Transform is handled by JS requestAnimationFrame for max smoothness */
+}
+
+.cursor-flower {
+  position: fixed;
+  pointer-events: none;
+  font-size: 24px;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  animation: floatAway 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes floatAway {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5) rotate(45deg);
+  }
+}
+
+@media (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+
+  .cursor-dot,
+  .cursor-outline {
+    display: none;
+  }
+}
+
+/* =============================================
+   SCROLL SNAP CONTAINER
+   ============================================= */
+.scroll-container {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.page {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 2rem;
+}
+
+/* =============================================
+   GLASSMORPHISM UTILS
+   ============================================= */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 3rem;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+}
+
+.section-title.text-light {
+  color: var(--text-light);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* =============================================
+   NAVIGATION BUTTON
+   ============================================= */
+.next-page-btn {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--text-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: bounceNav 2s infinite;
+  transition: background 0.3s, transform 0.3s;
+  z-index: 10;
+}
+
+.next-page-btn.light {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.next-page-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes bounceNav {
+
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+
+  50% {
+    transform: translate(-50%, 10px);
+  }
+}
+
+/* =============================================
+   PERFECT IMAGE FRAMING (POLAROID)
+   ============================================= */
+.polaroid {
+  background: #fff;
+  padding: 10px 10px 40px 10px;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.fit-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  /* Forces a perfect square */
+  border-radius: 2px;
+}
+
+/* =============================================
+   PAGE 1: HERO
+   ============================================= */
+.hero-page {
+  background: url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+  background-attachment: fixed;
+}
+
+.hero-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+      rgba(120, 20, 80, 0.65) 0%,
+      rgba(60, 10, 100, 0.55) 40%,
+      rgba(255, 80, 140, 0.35) 100%);
+  backdrop-filter: blur(2px);
+  z-index: -1;
+}
+
+/* Floating sparkle particles on hero */
+.hero-page .glass-panel {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 20px 60px rgba(120, 0, 80, 0.35),
+    0 0 0 1px rgba(255, 150, 200, 0.15),
+    inset 0 0 40px rgba(255, 255, 255, 0.05);
+}
+
+.hero-page .hero-title {
+  color: #fff;
+  text-shadow:
+    0 0 30px rgba(255, 100, 180, 0.8),
+    0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero-page .hero-date {
+  color: rgba(255, 230, 240, 0.95);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 5.5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero-title .cursive {
+  font-family: var(--font-cursive);
+  color: var(--pink-deep);
+  font-size: 1.2em;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.hero-date {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.hero-photo-wrapper {
+  position: relative;
+  width: 220px;
+  margin: 0 auto 2rem;
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+}
+
+.hero-photo-wrapper:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.sparkle {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 2rem;
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+/* =============================================
+   PAGE 2 & 7: MESSAGES
+   ============================================= */
+.message-page {
+  background: radial-gradient(circle at top right, #ffdde1, #ee9ca7);
+}
+
+.heart-page {
+  background: radial-gradient(circle at bottom left, #ffc3a0, #ffafbd);
+}
+
+.message-text {
+  font-size: 1.25rem;
+  line-height: 1.9;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: #553344;
+}
+
+/* =============================================
+   PAGE 3: MEMORIES
+   ============================================= */
+.memories-page {
+  background: linear-gradient(to bottom, #1a1a2e, #16213e);
+}
+
+.memories-page-inner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 50vw 2rem 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  width: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-track .polaroid {
+  scroll-snap-align: center;
+  min-width: 280px;
+  height: 400px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gallery-track .polaroid:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.gallery-track .polaroid:nth-child(odd) {
+  transform: rotate(-2deg);
+}
+
+.gallery-track .polaroid:hover {
+  transform: scale(1.1) rotate(0deg);
+  z-index: 2;
+}
+
+/* Gallery side navigation buttons */
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.gallery-nav:hover {
+  background: rgba(255, 77, 141, 0.7);
+  box-shadow: 0 6px 25px rgba(255, 77, 141, 0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-nav.prev {
+  left: 1rem;
+}
+
+.gallery-nav.next {
+  right: 1rem;
+}
+
+/* =============================================
+   PAGE 4: SONG PLAYLIST
+   ============================================= */
+.song-page {
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+
+.record-wrapper {
+  margin: 1rem auto;
+  width: 120px;
+  height: 120px;
+}
+
+.record {
+  width: 100%;
+  height: 100%;
+  background: repeating-radial-gradient(#111, #111 5px, #222 6px, #222 10px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: spin 4s linear infinite;
+  animation-play-state: paused;
+}
+
+.record-center {
+  width: 35px;
+  height: 35px;
+  background: var(--pink-deep);
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* PLAYLIST UI */
+.playlist {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.song-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  text-align: left;
+}
+
+.song-item:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(5px);
+}
+
+.song-item.active {
+  background: var(--pink-deep);
+  color: white;
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.song-artist {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.playing-bars {
+  display: none;
+  gap: 3px;
+  height: 15px;
+  align-items: flex-end;
+}
+
+.song-item.active .playing-bars {
+  display: flex;
+}
+
+.playing-bars .bar {
+  width: 3px;
+  background: white;
+  animation: bounceBar 0.5s infinite alternate;
+}
+
+.playing-bars .bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.playing-bars .bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounceBar {
+  0% {
+    height: 5px;
+  }
+
+  100% {
+    height: 15px;
+  }
+}
+
+.current-song-name {
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
+.current-song-desc {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.play-btn {
+  background: var(--text-dark);
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.15rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  letter-spacing: 1px;
+}
+
+.play-btn:hover {
+  background: var(--pink-deep);
+  transform: scale(1.07);
+  box-shadow: 0 8px 25px rgba(255, 77, 141, 0.5);
+}
+
+/* Player controls — sits between glass panel and next-btn */
+.player-controls {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+}
+
+/* =============================================
+   PAGE 5: WISHES
+   ============================================= */
+.wishes-page {
+  background: linear-gradient(to bottom, #cfd9df 0%, #e2ebf0 100%);
+}
+
+.stars-container {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.star {
+  font-size: 3.5rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+  filter: drop-shadow(0 4px 10px var(--gold));
+}
+
+.star:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.wish-display {
+  font-size: 1.5rem;
+  font-family: var(--font-cursive);
+  color: var(--pink-deep);
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+
+/* =============================================
+   PAGE 6: CAKE
+   ============================================= */
+.candle-page {
+  background: linear-gradient(180deg, #1f1c2c 0%, #928dab 100%);
+}
+
+.cake-container {
+  position: relative;
+  width: 220px;
+  height: 150px;
+  margin: 3rem auto;
+  cursor: pointer;
+}
+
+.cake-top {
+  width: 100%;
+  height: 60px;
+  background: #ffb6c1;
+  border-radius: 50% 50% 0 0;
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: var(--font-cursive);
+  font-size: 1.2rem;
+  box-shadow: inset 0 -5px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.cake-bottom {
+  width: 100%;
+  height: 70px;
+  background: #fff3cd;
+  border-radius: 0 0 20px 20px;
+  position: absolute;
+  bottom: 0;
+  border-bottom: 5px solid #ffc107;
+}
+
+.candle {
+  width: 12px;
+  height: 40px;
+  background: repeating-linear-gradient(45deg, #fff, #fff 5px, var(--pink-deep) 5px, var(--pink-deep) 10px);
+  position: absolute;
+  bottom: 100px;
+  border-radius: 4px 4px 0 0;
+  z-index: 1;
+}
+
+.c1 {
+  left: 50px;
+}
+
+.c2 {
+  left: 104px;
+}
+
+.c3 {
+  left: 158px;
+}
+
+.flame {
+  width: 16px;
+  height: 26px;
+  background: radial-gradient(ellipse at bottom, #fff176, #ffd740, #ff6d00);
+  border-radius: 50% 50% 30% 30%;
+  position: absolute;
+  bottom: 142px;
+  animation: flicker 0.8s infinite alternate;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+#flame1 {
+  left: 48px;
+}
+
+#flame2 {
+  left: 102px;
+}
+
+#flame3 {
+  left: 156px;
+}
+
+@keyframes flicker {
+  0% {
+    transform: scaleX(0.9) rotate(-2deg);
+  }
+
+  100% {
+    transform: scaleX(1.1) rotate(2deg);
+  }
+}
+
+.cake-msg {
+  color: #fff;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-family: var(--font-cursive);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* =============================================
+   PAGE 8: FOOTER
+   ============================================= */
+.footer-page {
+  background: linear-gradient(135deg, #302b63 0%, #24243e 100%);
+}
+
+.hearts {
+  font-size: 1.5rem;
+  letter-spacing: 10px;
+  margin: 1rem 0;
+  animation: pulse 2s infinite alternate;
+}
+
+.footer-main {
+  font-family: var(--font-cursive);
+  font-size: 2.2rem;
+  color: var(--pink-light);
+  margin: 1.5rem 0;
+}
+
+.footer-sub {
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* CONFETTI ANIMATION */
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  z-index: 9999;
+  animation: fall linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* =============================================
+   RESPONSIVE DESIGN
+   ============================================= */
+@media (max-width: 768px) {
+  .glass-panel {
+    padding: 2rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .gallery-track .polaroid {
+    min-width: 250px;
+    height: 350px;
+  }
+
+  .hero-photo-wrapper {
+    width: 180px;
+  }
+}
