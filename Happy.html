@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Bestie! 🎀</title>
+  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Custom Cursor Elements -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <!-- Audio Element -->
+  <audio id="bg-music" src="Barthday.webm" preload="auto"></audio>
+
+  <div class="scroll-container">
+
+    <!-- PAGE 1: Hero -->
+    <section class="page hero-page" id="page-1">
+      <div class="glass-panel">
+        <h1 class="hero-title">Happy <br><span class="cursive">Birthday</span></h1>
+        <p class="hero-date">🌸 Mai 13 Tu mera ❤️ 🌸</p>
+        <div class="hero-photo-wrapper polaroid">
+          <img src="11.jpeg" alt="Bestie" class="fit-img">
+          <div class="sparkle">✨</div>
+        </div>
+      </div>
+      <button class="next-page-btn" onclick="scrollToPage('page-2')">Swipe or Click Down ⬇</button>
+    </section>
+
+    <!-- PAGE 2: Message Section -->
+    <section class="page message-page" id="page-2">
+      <div class="glass-panel">
+        <h2 class="section-title">A Little Note...</h2>
+        <p class="message-text">
+          Hey you ✨<br><br>
+          I don't need a special occasion to tell you how much you mean to me — but since today is literally your day,
+          I'm saying it louder. You are the kind of person who makes ordinary days feel like adventures.<br><br>
+          The one I call when something amazing happens, and also when everything falls apart.
+        </p>
+      </div>
+      <button class="next-page-btn" onclick="scrollToPage('page-3')">Next ⬇</button>
+    </section>
+
+    <!-- PAGE 3: Memories -->
+    <section class="page memories-page" id="page-3">
+      <h2 class="section-title text-light">Your Beautiful Chaos 📸</h2>
+      <div class="gallery-track">
+        <div class="polaroid"><img src="6.jpeg" class="fit-img" alt="Memory">
+          <p>Hmari choti don😎</p>
+        </div>
+        <div class="polaroid"><img src="2.jpeg" class="fit-img" alt="Memory">
+          <p>Cutest Girl❤️‍🔥</p>
+        </div>
+        <div class="polaroid"><img src="24.jpeg" class="fit-img" alt="Memory">
+          <p> Butterfly🦋🦋</p>
+        </div>
+        <div class="polaroid"><img src="18.jpeg" class="fit-img" alt="Memory">
+          <p>Thoda Asthetic Pose Deta Hnu</p>
+        </div>
+        <div class="polaroid"><img src="25.jpeg" class="fit-img" alt="Memory">
+          <p>Pritiest Girl 🐷🐷</p>
+        </div>
+        <div class="polaroid"><img src="12.jpeg" class="fit-img" alt="Memory">
+          <p>Bestieeee🫂🫂</p>
+        </div>
+        <div class="polaroid"><img src="7.jpeg" class="fit-img" alt="Memory">
+          <p>No Caption Needed 🙄</p>
+        </div>
+        <div class="polaroid"><img src="4.jpeg" class="fit-img" alt="Memory">
+          <p>Sakal se Se Hni Harami Lagti H </p>
+        </div>
+        <div class="polaroid"><img src="20.jpeg" class="fit-img" alt="Memory">
+          <p> Barbie 💅</p>
+        </div>
+      </div>
+      <button class="next-page-btn light" onclick="scrollToPage('page-4')">Next ⬇</button>
+    </section>
+
+    <!-- PAGE 4: Song Playlist -->
+    <section class="page song-page" id="page-4">
+      <div class="music-player glass-panel">
+        <h2 class="section-title">Our Soundtrack 🎵</h2>
+
+        <div class="record-wrapper">
+          <div class="record" id="record">
+            <div class="record-center"></div>
+          </div>
+        </div>
+
+        <div class="playlist">
+          <div class="song-item active" onclick="playSong(0, 'Birthday', 'Happy Birthday 🎂', 'Barthday.webm')">
+            <div class="song-info">
+              <span class="song-title">Birthday</span>
+              <span class="song-artist">Unknown</span>
+            </div>
+            <div class="playing-bars">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+
+          <div class="song-item"
+            onclick="playSong(1, 'Main Tera Musafir', 'Mai Bhatka Tu Mera Basera 🌸', 'Main Tera __ Musafir Mai Bhatka Tu Mera Basera.webm')">
+            <div class="song-info">
+              <span class="song-title">Main Tera Musafir</span>
+              <span class="song-artist">Unknown</span>
+            </div>
+            <div class="playing-bars">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+
+          <div class="song-item"
+            onclick="playSong(2, 'Sitara Hai Tu', 'Meri nazar ka ✨', 'Sitara hai tu meri meri nazar ka.webm')">
+            <div class="song-info">
+              <span class="song-title">Sitara Hai Tu</span>
+              <span class="song-artist">Unknown</span>
+            </div>
+            <div class="playing-bars">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="current-song-name" id="current-title">Birthday</h3>
+        <p class="current-song-desc" id="current-desc">Happy Birthday 🎂</p>
+      </div>
+
+      <!-- Play button sits separately below the glass card -->
+      <div class="player-controls">
+        <button id="play-btn" class="play-btn">▶ Play</button>
+      </div>
+
+      <!-- Next page button pinned at the bottom -->
+      <button class="next-page-btn" onclick="scrollToPage('page-5')">Next ⬇</button>
+    </section>
+
+    <!-- PAGE 5: Birthday Wishes -->
+    <section class="page wishes-page" id="page-5">
+      <h2 class="section-title">Tap a Star ⭐</h2>
+      <div class="stars-container">
+        <div class="star" onclick="showWish(0)">⭐</div>
+        <div class="star" onclick="showWish(1)">⭐</div>
+        <div class="star" onclick="showWish(2)">⭐</div>
+        <div class="star" onclick="showWish(3)">⭐</div>
+        <div class="star" onclick="showWish(4)">⭐</div>
+      </div>
+      <div class="wish-display glass-panel" id="wish-display">
+        Make a wish!
+      </div>
+      <button class="next-page-btn" onclick="scrollToPage('page-6')">Next ⬇</button>
+    </section>
+
+    <!-- PAGE 6: Blow Candle -->
+    <section class="page candle-page" id="page-6">
+      <h2 class="section-title text-light">Make a Wish & Tap to Blow 🎂</h2>
+      <div class="cake-container" onclick="blowCandles()">
+        <div class="flame" id="flame1"></div>
+        <div class="flame" id="flame2"></div>
+        <div class="flame" id="flame3"></div>
+        <div class="candle c1"></div>
+        <div class="candle c2"></div>
+        <div class="candle c3"></div>
+        <div class="cake-top">Happy Birthday!</div>
+        <div class="cake-bottom"></div>
+      </div>
+      <p class="cake-msg" id="cake-msg"></p>
+      <button class="next-page-btn light" onclick="scrollToPage('page-7')">Next ⬇</button>
+    </section>
+
+    <!-- PAGE 7: Message from Heart -->
+    <section class="page heart-page" id="page-7">
+      <div class="glass-panel">
+        <h2 class="section-title">From the Heart ♥</h2>
+        <p class="message-text">
+          Watching you exist in the world — with all your warmth, your chaos, your brilliance — genuinely makes me proud
+          to be your best friend. <br><br>
+          Today I hope you feel as loved as you make everyone around you feel. You are irreplaceable. Happy birthday, my
+          favorite human.
+        </p>
+      </div>
+      <button class="next-page-btn" onclick="scrollToPage('page-8')">Next ⬇</button>
+    </section>
+
+    <!-- PAGE 8: Footer -->
+    <section class="page footer-page" id="page-8">
+      <div class="glass-panel text-center">
+        <div class="hearts">💕 💖 💕 💖 💕</div>
+        <h2 class="footer-main">Made with all my love, just for you 🌸</h2>
+        <p class="footer-sub">Have the most magical birthday ever, bestie ✨</p>
+        <div class="hearts">🌺 🌸 🌺 🌸 🌺</div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // -----------------------------------------
+    // SMOOTH SCROLL NAVIGATION
+    // -----------------------------------------
+    function scrollToPage(pageId) {
+      document.getElementById(pageId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // -----------------------------------------
+    // 1. ULTRA-SMOOTH FLOWER CURSOR EFFECT
+    // -----------------------------------------
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let outlineX = 0;
+    let outlineY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      // Dot moves instantly via transform
+      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    });
+
+    // Lerp function for buttery smooth trailing outline
+    function lerp(start, end, amt) {
+      return (1 - amt) * start + amt * end;
+    }
+
+    function animateCursor() {
+      outlineX = lerp(outlineX, mouseX, 0.15);
+      outlineY = lerp(outlineY, mouseY, 0.15);
+      cursorOutline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Spawn flowers on click/touch
+    function spawnFlower(x, y) {
+      const flower = document.createElement('div');
+      flower.classList.add('cursor-flower');
+      const flowers = ['🌸', '🌺', '✨', '💖'];
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = x + 'px';
+      flower.style.top = y + 'px';
+
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 40 + Math.random() * 60;
+      flower.style.setProperty('--tx', `${Math.cos(angle) * distance}px`);
+      flower.style.setProperty('--ty', `${Math.sin(angle) * distance}px`);
+
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 1000);
+    }
+
+    window.addEventListener('click', (e) => {
+      // Don't spawn if clicking a button to keep UI clean
+      if (e.target.tagName.toLowerCase() === 'button') return;
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => spawnFlower(e.clientX, e.clientY), i * 40);
+      }
+    });
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.target.tagName.toLowerCase() === 'button') return;
+      for (let i = 0; i < e.touches.length; i++) {
+        spawnFlower(e.touches[i].clientX, e.touches[i].clientY);
+      }
+    });
+
+    // -----------------------------------------
+    // 2. PLAYLIST AUDIO PLAYER
+    // -----------------------------------------
+    const audio = document.getElementById('bg-music');
+    const playBtn = document.getElementById('play-btn');
+    const record = document.getElementById('record');
+    const songItems = document.querySelectorAll('.song-item');
+    const currentTitle = document.getElementById('current-title');
+    const currentDesc = document.getElementById('current-desc');
+    let isPlaying = false;
+    let currentSongIndex = 0;
+
+    function playSong(index, title, desc, src) {
+      currentSongIndex = index;
+      currentTitle.textContent = title;
+      currentDesc.textContent = desc;
+
+      // Update UI active state
+      songItems.forEach((item, i) => {
+        if (i === index) item.classList.add('active');
+        else item.classList.remove('active');
+      });
+
+      // Update audio source if provided and changed
+      if (src) {
+        const currentSrc = audio.getAttribute('src');
+        if (currentSrc !== src) {
+          audio.src = src;
+        }
+      }
+
+      // Restart and play audio
+      audio.currentTime = 0;
+      audio.play();
+      isPlaying = true;
+      record.style.animationPlayState = 'running';
+      playBtn.innerHTML = '⏸ Pause';
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        record.style.animationPlayState = 'paused';
+        playBtn.innerHTML = '▶ Play';
+      } else {
+        audio.play();
+        record.style.animationPlayState = 'running';
+        playBtn.innerHTML = '⏸ Pause';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // -----------------------------------------
+    // 3. WISHES
+    // -----------------------------------------
+    const wishes = [
+      "May every dream you hold dear come true this year! 🌟",
+      "Wishing you a year full of laughter and adventures! 🌺",
+      "May happiness follow you everywhere you go! 💕",
+      "Here's to endless joy, good health, and beautiful memories! ✨",
+      "Wishing you a heart full of love and a life full of magic! 🦋"
+    ];
+    function showWish(idx) {
+      const display = document.getElementById('wish-display');
+      display.style.opacity = '0';
+      setTimeout(() => {
+        display.textContent = wishes[idx];
+        display.style.opacity = '1';
+      }, 300);
+
+      const stars = document.querySelectorAll('.star');
+      const rect = stars[idx].getBoundingClientRect();
+      for (let i = 0; i < 4; i++) {
+        spawnFlower(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }
+    }
+
+    // -----------------------------------------
+    // 4. BLOW CANDLES & CONFETTI
+    // -----------------------------------------
+    let blown = false;
+    function blowCandles() {
+      if (blown) return;
+      blown = true;
+      document.getElementById('flame1').style.opacity = '0';
+      document.getElementById('flame1').style.transform = 'translateY(-20px) scale(0)';
+
+      setTimeout(() => {
+        document.getElementById('flame2').style.opacity = '0';
+        document.getElementById('flame2').style.transform = 'translateY(-20px) scale(0)';
+      }, 150);
+
+      setTimeout(() => {
+        document.getElementById('flame3').style.opacity = '0';
+        document.getElementById('flame3').style.transform = 'translateY(-20px) scale(0)';
+        document.getElementById('cake-msg').textContent = "🎉 Yay! Happy Birthday! 🎉";
+        document.getElementById('cake-msg').style.opacity = '1';
+        fireConfetti();
+      }, 300);
+    }
+
+    function fireConfetti() {
+      const colors = ['#f7c5d5', '#e91e8c', '#f7c948', '#ffffff'];
+      for (let i = 0; i < 100; i++) {
+        const conf = document.createElement('div');
+        conf.classList.add('confetti');
+        conf.style.left = Math.random() * 100 + 'vw';
+        conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        conf.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        conf.style.animationDelay = (Math.random() * 0.5) + 's';
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 5000);
+      }
+    }
+  </script>
+</body>
+
+</html>
